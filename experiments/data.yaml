@@ -1,0 +1,5 @@
+train: /Users/gipo/my-stuff/MIT/shoe-sizer/experiments/dataset/train/images  # Path to training images
+val: /Users/gipo/my-stuff/MIT/shoe-sizer/experiments/dataset/val/images
+
+nc: 2  # Number of classes (e.g., 2 for 'coin' and 'foot')
+names: ['coin', 'foot']  # Class names
