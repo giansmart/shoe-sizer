@@ -35,18 +35,56 @@ python app.py
 Este diagrama muestra cómo viajan los datos desde el usuario hasta obtener la predicción.
 
 ```mermaid
-graph LR
-    A[Usuario] -->|Input (Imagen/Medidas)| B(Interfaz Gradio)
-    B -->|Procesamiento| C{Lógica / Modelo}
-    C -->|Cálculo| D[Predicción de Talla]
-    D -->|Resultado| B
+flowchart LR
+    U[Usuario] -->|Imagen o medidas| G[Interfaz Gradio]
+    G -->|Procesamiento| M[Logica del modelo]
+    M -->|Calculo| P[Prediccion de talla]
+    P -->|Resultado| G
 ```
 
-### Estructura del Sistema
-Vista de alto nivel de la interacción entre el cliente y el servidor.
+### Arquitectura del Pipeline
+Pipeline observado en los notebooks de `experiments` para estimar talla desde imagen.
 
 ```mermaid
-graph TD
-    Client[Navegador Web] <-->|WebSocket / HTTP| Server[Servidor Gradio (Python)]
-    Server -->|Ejecuta| Logic[Algoritmo Shoe Sizer]
+flowchart TD
+    I[Imagen de pie con moneda]
+
+    subgraph V["Vision Pipeline"]
+        direction TD
+        D[YOLO deteccion coin y foot]
+        P[Puntos de referencia centros]
+        G[SAM segmentacion guiada]
+        B[Bounding boxes desde mascaras]
+    end
+
+    subgraph FEA["Feature Engineering"]
+        direction TD
+        F[Features width height coin_width coin_height foot_width]
+        C[Calibracion con diametro moneda 25.5 mm]
+    end
+
+    subgraph ML["Modelado y Salida"]
+        direction TD
+        M[Modelo de regresion XGBoost]
+        O[Prediccion size_cm]
+        E[Conversion a talla EU]
+    end
+
+    I --> D
+    B --> F
+    C --> M
+    M --> O
+    O --> E
+
+    classDef input fill:#e8f1ff,stroke:#2563eb,stroke-width:2px,color:#0f172a;
+    classDef vision fill:#ecfeff,stroke:#0891b2,stroke-width:1.5px,color:#0f172a;
+    classDef feat fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#0f172a;
+    classDef model fill:#fff7ed,stroke:#ea580c,stroke-width:1.5px,color:#0f172a;
+    classDef output fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#0f172a;
+
+    class I input;
+    class D,P,G,B vision;
+    class F,C feat;
+    class M model;
+    class O,E output;
 ```
