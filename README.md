@@ -29,62 +29,44 @@ python app.py
 # Note: Replace 'app.py' with the name of your main script if different.
 ```
 
-## Arquitectura
+## Architecture
 
-### Flujo de Datos
-Este diagrama muestra cómo viajan los datos desde el usuario hasta obtener la predicción.
+### Data Flow
+This diagram shows how data moves from the user to the final size prediction.
 
 ```mermaid
 flowchart LR
-    U[Usuario] -->|Imagen o medidas| G[Interfaz Gradio]
-    G -->|Procesamiento| M[Logica del modelo]
-    M -->|Calculo| P[Prediccion de talla]
-    P -->|Resultado| G
+    U[User] -->|Image or measurements| G[Gradio interface]
+    G -->|Processing| M[Model logic]
+    M -->|Computation| P[Size prediction]
+    P -->|Result| G
 ```
 
-### Arquitectura del Pipeline
-Pipeline observado en los notebooks de `experiments` para estimar talla desde imagen.
+### Pipeline Architecture
+Pipeline observed in the `experiments` notebooks to estimate size from an image.
 
 ```mermaid
 flowchart TD
-    I[Imagen de pie con moneda]
+    I[Foot image with coin]
+    D[YOLO detection for coin and foot]
+    P[Center reference points]
+    G[SAM guided segmentation]
+    B[Bounding boxes from masks]
+    F[Features width height coin_width coin_height foot_width]
+    C[Calibration with coin diameter 25.5 mm]
+    M[XGBoost regression model]
+    O[Predicted size_cm]
+    E[EU size conversion]
 
-    subgraph V["Vision Pipeline"]
-        direction TD
-        D[YOLO deteccion coin y foot]
-        P[Puntos de referencia centros]
-        G[SAM segmentacion guiada]
-        B[Bounding boxes desde mascaras]
-    end
-
-    subgraph FEA["Feature Engineering"]
-        direction TD
-        F[Features width height coin_width coin_height foot_width]
-        C[Calibracion con diametro moneda 25.5 mm]
-    end
-
-    subgraph ML["Modelado y Salida"]
-        direction TD
-        M[Modelo de regresion XGBoost]
-        O[Prediccion size_cm]
-        E[Conversion a talla EU]
-    end
-
-    I --> D
-    B --> F
-    C --> M
-    M --> O
-    O --> E
-
-    classDef input fill:#e8f1ff,stroke:#2563eb,stroke-width:2px,color:#0f172a;
-    classDef vision fill:#ecfeff,stroke:#0891b2,stroke-width:1.5px,color:#0f172a;
-    classDef feat fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#0f172a;
-    classDef model fill:#fff7ed,stroke:#ea580c,stroke-width:1.5px,color:#0f172a;
-    classDef output fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#0f172a;
-
-    class I input;
-    class D,P,G,B vision;
-    class F,C feat;
-    class M model;
-    class O,E output;
+    I --> D --> P --> G --> B --> F --> C --> M --> O --> E
 ```
+
+## Authors
+
+
+| Avatar | Name | Role | Links |
+|---|---|---|---|
+| <img src="https://media.licdn.com/dms/image/v2/D5603AQGMRNUDZ2oHSg/profile-displayphoto-shrink_800_800/B56ZW2EgVTGUAc-/0/1742516389753?e=1774483200&v=beta&t=U9HLdPOT8cOJBQEQ2Big1HAsY60Hssy7o8zPxfG5g74" width="60" alt="Diana" style="border-radius: 50%;" /> | Diana Sánchez | Full Stack & Data Scientist |[LinkedIn](https://www.linkedin.com/in/diana-sanchez-ordonez/) |
+| <img src="https://media.licdn.com/dms/image/v2/D4E35AQFJQQe7U6XKpg/profile-framedphoto-shrink_800_800/B4EZwRcEroIIAg-/0/1769819098121?e=1773352800&v=beta&t=IxfavChM1l4rAK2yX-YdJkKjagciJlvJxWvupQYMeZ8" width="60" alt="Robert" style="border-radius: 50%;" /> | Robert J. Buleje| DI Analyst & Data Scientist |[LinkedIn](https://www.linkedin.com/in/rjbuleje/) |
+| <img src="https://media.licdn.com/dms/image/v2/D4E03AQHzUlyu-XxMQw/profile-displayphoto-shrink_800_800/B4EZZjfl2.HoAg-/0/1745425959801?e=1774483200&v=beta&t=7EOOznnRQLFnGekJiMuMGUa67wzv0AFNuJajDJK7phk" width="60" alt="Giancarlo" style="border-radius: 50%;" /> | Giancarlo Poémape| Data Engineer & ML Engineer |[LinkedIn](https://www.linkedin.com/in/giancarlopoemape/) |
+
