@@ -67,16 +67,16 @@ flowchart TD
   <tr>
     <td align="center"><img src="https://media.licdn.com/dms/image/v2/D4E03AQHzUlyu-XxMQw/profile-displayphoto-shrink_800_800/B4EZZjfl2.HoAg-/0/1745425959801?e=1774483200&v=beta&t=7EOOznnRQLFnGekJiMuMGUa67wzv0AFNuJajDJK7phk" width="80" alt="Giancarlo" style="border-radius: 50%;" /></td>
     <td><strong>Giancarlo Poémape</strong><br />Data Engineer &amp; ML Engineer</td>
-    <td><a href="https://www.linkedin.com/in/giancarlopoemape/">LinkedIn</a></td>
+    <td><a href="https://www.linkedin.com/in/giancarlopoemape/">LinkedIn</a> | <a href="https://github.com/giancarlopoemape">GitHub</a>  </td>
   </tr>
   <tr>
     <td align="center"><img src="https://media.licdn.com/dms/image/v2/D5603AQGMRNUDZ2oHSg/profile-displayphoto-shrink_800_800/B56ZW2EgVTGUAc-/0/1742516389753?e=1774483200&v=beta&t=U9HLdPOT8cOJBQEQ2Big1HAsY60Hssy7o8zPxfG5g74" width="80" alt="Diana" style="border-radius: 50%;" /></td>
     <td><strong>Diana Sánchez</strong><br />Full Stack &amp; Data Scientist</td>
-    <td><a href="https://www.linkedin.com/in/diana-sanchez-ordonez/">LinkedIn</a></td>
+    <td><a href="https://www.linkedin.com/in/diana-sanchez-ordonez/">LinkedIn</a> | <a href="https://github.com/DianaSanchezOrdonez">GitHub</a> </td>
   </tr>
   <tr>
     <td align="center"><img src="https://media.licdn.com/dms/image/v2/D4E35AQFJQQe7U6XKpg/profile-framedphoto-shrink_800_800/B4EZwRcEroIIAg-/0/1769819098121?e=1773352800&v=beta&t=IxfavChM1l4rAK2yX-YdJkKjagciJlvJxWvupQYMeZ8" width="80" alt="Robert" style="border-radius: 50%;" /></td>
     <td><strong>Robert J. Buleje</strong><br />DI Analyst &amp; Data Scientist</td>
-    <td><a href="https://www.linkedin.com/in/rjbuleje/">LinkedIn</a></td>
+    <td><a href="https://www.linkedin.com/in/rjbuleje/">LinkedIn</a> | <a href="https://github.com/rjbuleje">GitHub</a> </td>
   </tr>
 </table>
